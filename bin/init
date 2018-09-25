@@ -1,1 +1,8 @@
-terraform init -backend-config="bucket=terraform-2018" -backend-config="region=us-east-1"
+# shell out the config
+terraform output config_map_aws_auth >> config-map-aws-auth.yaml
+
+# apply the config via kubectl
+kubectl apply -f config-map-aws-auth.yaml
+
+# verify nodes have joined
+kubectl get nodes --watch
