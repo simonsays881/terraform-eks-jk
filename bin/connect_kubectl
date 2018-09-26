@@ -1,0 +1,15 @@
+# Config to connect to EKS with kubectl
+echo "Configuring EKS cluster"
+
+terraform output kube_config > ~/.kube/config
+
+# Config to connect worker nodes
+echo "Configuring EKS worker nodes"
+
+terraform output config_map_aws_auth > config-map-aws-auth.yaml
+
+# apply the config via kubectl
+kubectl apply -f config-map-aws-auth.yaml
+
+# verify nodes have joined
+kubectl get nodes --watch
