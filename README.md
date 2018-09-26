@@ -5,15 +5,15 @@ This repo uses terraform to provision an AWS EKS managed kubernetes cluster foll
 
 **TL;DR:Terraform and EKS on AWS**
 
-1. Set up your IAM profile to be able to dude kubernetes things.
+1. Set up your IAM profile to be able to do kubernetes things.
 2. Build the infrastructure
 3. configure the new cluster with vars.
 
-**TL;DR:Deploy Jenkins onto EKS**
+**TODO: TL;DR:Deploy Jenkins onto EKS**
 
-1. Set up Jenkins IAM
-2. Set up Jenkins Master
-3. Set up Jenkins Executors
+1. TODO: Set up Jenkins IAM
+2. TODO: Set up Jenkins Master
+3. TODO: Set up Jenkins Executors
 
 #### Command Line Tools
 
