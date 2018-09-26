@@ -1,8 +1,14 @@
-# shell out the config
-terraform output config_map_aws_auth >> config-map-aws-auth.yaml
+## Verify that iam has correct credentials
+## download aws-iam-authenticator
+## Needed EKS IAM
 
-# apply the config via kubectl
-kubectl apply -f config-map-aws-auth.yaml
+## verify credentials
+aws sts get-caller-identity
 
-# verify nodes have joined
-kubectl get nodes --watch
+## download kubectl
+
+# build terraform
+terraform plan -out tfplan -var cluster_name=${CLUSTER_NAME} -aws_region=${AWS_REGION}
+
+terraform apply tfplan
+

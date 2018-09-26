@@ -1,5 +1,5 @@
 locals {
-  kube_config = <<KUBECONFIG
+  kube_config = <<EOF
 apiVersion: v1
 clusters:
 - cluster:
@@ -24,7 +24,7 @@ users:
         - "token"
         - "-i"
         - "${var.cluster_name}"
-KUBECONFIG
+EOF
 }
 
 output "kube_config" {
@@ -32,9 +32,7 @@ output "kube_config" {
 }
 
 locals {
-  config_map_aws_auth = <<CONFIGMAPAWSAUTH
-
-
+  config_map_aws_auth = <<EOF
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -47,7 +45,7 @@ data:
       groups:
         - system:bootstrappers
         - system:nodes
-CONFIGMAPAWSAUTH
+EOF
 }
 
 output "config_map_aws_auth" {
