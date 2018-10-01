@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jenkins-demo
+  namespace: jenkins
+spec:
+  containers:
+  - name: jenkins-demo
+    image: jenkins/jenkins:lts
+    ports:
+    - containerPort: 8080
+    - containerPort: 50000
