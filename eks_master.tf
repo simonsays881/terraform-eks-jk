@@ -59,8 +59,8 @@ resource "aws_security_group_rule" "jk_cluster_ingress_local" {
 }
 
 resource "aws_eks_cluster" "jk_cluster" {
-  name            = "${var.cluster_name}"
-  role_arn        = "${aws_iam_role.jk_cluster.arn}"
+  name     = "${var.cluster_name}"
+  role_arn = "${aws_iam_role.jk_cluster.arn}"
 
   vpc_config {
     security_group_ids = ["${aws_security_group.jk_cluster.id}"]

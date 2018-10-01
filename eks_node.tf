@@ -75,8 +75,7 @@ resource "aws_security_group_rule" "node_ingress_cluster" {
   source_security_group_id = "${aws_security_group.jk_cluster.id}"
   to_port                  = 65535
   type                     = "ingress"
-
-  }
+}
 
 resource "aws_security_group_rule" "cluster_ingress_node_https" {
   description              = "Allow pods to communicate with the cluster API Server"
