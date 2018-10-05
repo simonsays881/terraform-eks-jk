@@ -45,6 +45,11 @@ aws sts get-caller-identity #uses this IAM profile for kubectl execution
 4. Get password
 
 
+https://engineering.riotgames.com/news/jenkins-ephemeral-docker-tutorial
+
+https://piotrminkowski.wordpress.com/2017/03/20/microservices-continuous-delivery-with-docker-and-jenkins/
+
+
 ```
 kubectl create pod -f pods/jenkins.yaml
 kubectl run [pod-name]
@@ -70,7 +75,6 @@ If you see an error message like this one:
 Follow this doc to resolve
 
 https://docs.helm.sh/using_helm/#tiller-and-role-based-access-control
-
 
 
 #### Terraform AWS Architecture
