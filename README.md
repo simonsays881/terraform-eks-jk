@@ -18,6 +18,8 @@ This repo uses terraform to provision an AWS EKS managed kubernetes cluster foll
 
 #### Command Line Tools
 
+You will need the following CLI tools in order to follow along
+
 * [AWS cli](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html)
 
 * [kubectl](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
@@ -27,6 +29,8 @@ This repo uses terraform to provision an AWS EKS managed kubernetes cluster foll
 * [helm](https://docs.helm.sh/using_helm/#installing-helm)
 
 ##### aws-iam-authenticator
+
+`aws-iam-authenticator` runs aws cli EKS commands with the current caller identity
 
 * download authenticator via curl
 * make executable
@@ -49,7 +53,6 @@ https://engineering.riotgames.com/news/jenkins-ephemeral-docker-tutorial
 
 https://piotrminkowski.wordpress.com/2017/03/20/microservices-continuous-delivery-with-docker-and-jenkins/
 
-
 ```
 kubectl create pod -f pods/jenkins.yaml
 kubectl run [pod-name]
@@ -57,7 +60,6 @@ kubectl port-forward [pod-name] --port 8080:8080
 kubectl exec [pod-name] -- cat /var/jenkins_home/secrets/initialAdminPassword
 kubectl describe deployments | pods | services
 ```
-
 
 Stop the pod
 
@@ -82,42 +84,42 @@ https://docs.helm.sh/using_helm/#tiller-and-role-based-access-control
 Before building the infrastructure, remember to create and use a workspace
 
 ##### Networking
-- vpc
-- 2 subnets
-- route table
-- 2 route table association (one per subnet)
+* vpc
+* 2 subnets
+* route table
+* 2 route table association (one per subnet)
 
 ##### EKS Master
 
-- eks cluster 
-- iam role
-- 2 iam role policy attachments (EKSCluster / EKSService Policy)
-- security group
-- security group rule (local workstation to master)
+* eks cluster 
+* iam role
+* 2 iam role policy attachments (EKSCluster / EKSService Policy)
+* security group
+* security group rule (local workstation to master)
 
 
 ##### EKS Workers
 
-- security group
-- security group rule (node to self)
-- security group rule (master to node)
-- security group rule (node to master via https)
-- iam role
-- iam instance profile
-- 3 iam policy documents (EKSWorker / CNI / EC2ContainerRegistryRO)
-- eks 
+* security group
+* security group rule (node to self)
+* security group rule (master to node)
+* security group rule (node to master via https)
+* iam role
+* iam instance profile
+* 3 iam policy documents (EKSWorker / CNI / EC2ContainerRegistryRO)
+* eks 
 
 ##### Autoscaling Group / Config
 
-- autoscaling group
-- asg launch configuration
-- amazon ami for kubernetes
-- userdata
+* autoscaling group
+* asg launch configuration
+* amazon ami for kubernetes
+* userdata
 
 ##### Cluster & Worker Config
 
-- kube_config
-- config_map_aws_auth
+* kube_config
+* config_map_aws_auth
 
 #### Configure local workstation with kube_config
 
@@ -128,7 +130,7 @@ Before building the infrastructure, remember to create and use a workspace
 terraform output kube_config > ~/.kube/config
 terraform output config_map_aws_auth > config_map_aws_auth.yaml
 kubectl apply -f config_map_aws_auth.yaml
-kubectl get nodes —watch
+kubectl get nodes —watch # crtl + z to put into the background
 ```
 
 You should see output similiar to the following:
@@ -138,10 +140,9 @@ terraform-eks-jk master % ./bin/connect_kubectl
 Configuring EKS cluster
 Configuring EKS worker nodes
 configmap/aws-auth created
-NAME                        STATUS     ROLES     AGE       VERSION
-ip-10-0-0-32.ec2.internal   NotReady   <none>    1s        v1.10.3
-ip-10-0-0-32.ec2.internal   NotReady   <none>    1s        v1.10.3
+NAME                         STATUS     ROLES     AGE       VERSION
+ip-10-0-0-32.ec2.internal    NotReady   <none>    1s        v1.10.3
+ip-10-0-0-32.ec2.internal    NotReady   <none>    1s        v1.10.3
 ip-10-0-1-235.ec2.internal   NotReady   <none>    1s        v1.10.3
 ip-10-0-1-235.ec2.internal   NotReady   <none>    1s        v1.10.3
 ```
-
