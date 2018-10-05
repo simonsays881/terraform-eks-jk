@@ -49,7 +49,7 @@ resource "aws_security_group" "jk_cluster" {
 #           your real IP. Services like icanhazip.com can help you find this.
 resource "aws_security_group_rule" "jk_cluster_ingress_local" {
   count             = 1
-  cidr_blocks       = ["50.244.31.163/32"]
+  cidr_blocks       = ["xx.x.xx.xxx/x"] # Use https://icanhazip.com to get the value for this property
   description       = "Allow workstation to communicate with the cluster API Server"
   from_port         = 443
   protocol          = "tcp"
